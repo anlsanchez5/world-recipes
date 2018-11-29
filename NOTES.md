@@ -8,6 +8,39 @@ How to Build a CLI Gem
 6. start making things real
 7. discover objects.
 8. program
+______________________________________________________________________________________________________
+Plan Before Project Idea Approval Meeting
+An overall summary of the application. What is your application going to do?
+  Pull up a list of world cuisines, types of food and recipe details
+
+Try to create skeleton app and repository on github
+  Halfway done
+
+Here is a video showing how to do so: https://instruction.learn.co/student/video_lectures#/319
+
+Complete these questions to the best of your ability:
+
+What website will you be scraping?
+  allrecipes
+
+What will you need to do with the data you return from scraping?
+  create a world-cuisine class with attritubes of name and food-categories, food-category class with attribute of name and recipes and recipe class with attributes of name, serving size, cooking time, picture link, ingredients and instructions
+
+What classes will you be using?
+  World_Cuisine
+  Food_Category
+  Recipe
+
+What will be the flow of displaying data for your application. ex How will your CLI portion work.
+  Refer to section below
+
+How will you display data one level deep to the user?
+  Specific Recipe details
+
+What will need to be in your README file?
+  Basic Description, installation instructions, usage, licence, contributing, development, code of conduct
+
+________________________________________________________________________________________________________
 
 -A command line interface for top recipes by culture and food category based on al recipes website
 
