@@ -2,37 +2,39 @@ class WorldRecipes::CLI
 
   def call
     list_cuisines
-    menu
+    category_menu
+    recipe_menu
     goodbye
   end
 
   def list_cuisines
     puts "Top World Recipes"
     @cuisines = WorldRecipes::Cuisine.all
+    @cuisines.each.with_index(1) do |cuisine, i|
+      puts "#{i}. #{cuisine.name}"
+    end
   end
 
-  def menu
+  def category_menu
     input = nil
     while input != "exit"
       puts "Enter the number of the cuisine you'd like more food categories on or or type list to see the cusines again or type exit:"
       input = gets.strip.downcase
-      case input
-      when "1"
-        puts "List of mexican food categories"
-      when "2"
-        puts "List of Indian food categoires"
-      when "3"
-        puts "List of Korean food categories"
-      when "4"
-        puts "List of American food categories"
-      when "5"
-        puts "List of Japanese food categories"
-      when "list"
+      if input.to_i > 0
+        @cuisines[input.to_i-1].list_category
+        input = "exit"
+      elsif input == "list"
         list_cuisines
       else
         puts "Not sure what you want, type list or exit."
       end
     end
+  end
+
+  def recipe_menu
+    input = nil
+    #while input != "exit"
+    puts "Enter the number of the food category you'd like to see recipes on, type cuisine list to go back to the cuisines or type category list to see the food categories again, or tye exit:"
   end
 
   def goodbye
