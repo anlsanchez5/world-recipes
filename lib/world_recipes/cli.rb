@@ -8,13 +8,7 @@ class WorldRecipes::CLI
 
   def list_cuisines
     puts "Top World Recipes"
-    puts <<-DOC.gsub /^\s*/, ''
-      1. Mexican
-      2. Indian
-      3. Korean
-      4. American
-      5. Japanese
-    DOC
+    @cuisines = WorldRecipes::Cuisine.all
   end
 
   def menu
