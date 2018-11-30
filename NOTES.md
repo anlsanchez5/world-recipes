@@ -101,3 +101,26 @@ If you would like to see more recipes select from the following options, otherwi
   1. Mexican Desserts
   2. Mexican cuisine
   3. World cuisines
+
+
+
+
+
+
+  What is a cuisine?
+
+  -A cuisine has a name
+  -A cuisine has a food categories
+  -A cuisine has a URL
+____________________________________________________________  
+Example:
+india cuisine
+  name: Indian
+  URL: https//:allrecipes.com/Indian
+  food_catgories: Dessert, drinks, main meal, side dish
+_____________________________________________________________
+
+  What is a food category?
+    -A food category has a name
+    -A food category has recipes
+    -A food category has a
