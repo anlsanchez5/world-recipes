@@ -124,3 +124,18 @@ _____________________________________________________________
     -A food category has a name
     -A food category has recipes
     -A food category has a
+_______________________________________________________________
+Example:
+indian food category
+  name: Indian Desserts
+  URL: https//:allrecipes.come/indiandesserts
+  recipes: something sweet, something milky, something creamy
+_______________________________________________________________
+
+  What is a recipe?
+  -A recipe has a name
+  -A recipe has a picture URL
+  -A recipe has cooking time
+  -A recipe has number of servings
+  -A recipe has ingredients
+  -A recipe has instructions
