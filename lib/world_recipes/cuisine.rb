@@ -1,5 +1,9 @@
 class WorldRecipes::Cuisine
-  attr_accessor :name, :url, :food_category 
+  attr_accessor :name, :url, :food_categories
+
+  def initialize
+    @food_categories = []
+  end
 
   def self.all
     # I should return a list of instances of Cuisine
@@ -10,14 +14,14 @@ class WorldRecipes::Cuisine
       4. American
       5. Japanese
     DOC
-    cuisine_1 = Cuisine.new
+    cuisine_1 = self.new
     cuisine_1.name = "Mexican"
-    cuisine_1.food_category.all = "list of mexican food categories"
+    cuisine_1.food_categories = "list of mexican food categories" # this will be an array of FoodCagegory instances
     cuisine_1.url = "http://allrecipes.com/mexican"
 
-    cuisine_2 = Cuisine.new
+    cuisine_2 = self.new
     cuisine_2.name = "Indian"
-    cuisine_2.food_category.all = "list of indian food categories"
-    cuisine_2.url = "http://allrecipes.com/indian
+    cuisine_2.food_categories = "list of indian food categories" # this will be an array of FoodCagegory instances
+    cuisine_2.url = "http://allrecipes.com/indian"
   end
 end
