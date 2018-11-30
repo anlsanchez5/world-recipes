@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/world_recipes'
+require "bundler/setup"
+require "world_recipes"
 
 WorldRecipes::CLI.new.call
