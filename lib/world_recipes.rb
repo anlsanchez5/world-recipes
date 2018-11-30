@@ -1,6 +1,2 @@
-require "world_recipes/version"
-
-module WorldRecipes
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "./world_recipes/version"
+require_relative './world_recipes/cli'
