@@ -47,25 +47,25 @@ class WorldRecipes::Recipe
         1 tablespoon vanilla extract
       "
         recipe_1.instructions = "
-        1.  Whisk cold water, sugar, cocoa powder, flour, cinnamon, cloves, and salt in a saucepan until smooth. 
-            Place over low heat; bring to a simmer, whisking constantly, until mixture is thickened and hot, about 4 minutes. 
-            Stir in milk; heat until hot chocolate just forms bubbles around the edge. Mix vanilla extract into hot chocolate. 
+        1.  Whisk cold water, sugar, cocoa powder, flour, cinnamon, cloves, and salt in a saucepan until smooth.
+            Place over low heat; bring to a simmer, whisking constantly, until mixture is thickened and hot, about 4 minutes.
+            Stir in milk; heat until hot chocolate just forms bubbles around the edge. Mix vanilla extract into hot chocolate.
             Blend until smooth with an immersion blender to make the drink slightly frothy."
     [recipe_1, recipe_2]
   end
 
   def dipslay_recipe
-    self.all.each |recipe|
+    self.all.each do |recipe|
     puts <<-DOC.gsub /^\s*/, ''
       #{recipe.name}
       Link for Picture: #{recipe.picture_url}
-      _____________________ 
+      _____________________
       #{recipe.number_servings}|#{recipe.cooking_time}
-      _____________________ 
+      _____________________
 
       #{recipe.ingredients}
 
-      Instructions 
+      Instructions
        #{recipe.instructions}
      DOC
    end

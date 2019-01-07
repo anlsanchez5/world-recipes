@@ -22,14 +22,14 @@ class WorldRecipes::FoodCategory
       category_2.name = "Appetizers"
       category_2.recipes = "list of Appetizers" # this will be an array of Recipe instances
       category_2.url = "http://allrecipes.com/indian"
-      
+
       [category_1, category_2]
     end
 
     def list_recipes
       @recipes = WorldRecipes::Recipe.all
-      @recipes.each.with_index(1) |recipe, i|
+      @recipes.each.with_index(1) do |recipe, i|
       puts "#{i}. #{recipe.name}"
-
+      end
     end
 end

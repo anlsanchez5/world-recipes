@@ -33,13 +33,13 @@ class WorldRecipes::CLI
   end
 
   def recipe_menu
-    input = nil    
+    input = nil
     while input != "exit"
       puts "Enter the number of the food category you'd like to see recipes on, type cuisine list to go back to the cuisines or type category list to see the food categories again, or tye exit:"
       input = gets.strip.downcase
       if input.to_i > 0
-        @food_categories = WorldRecipes::FoodCategories.all
-        @food_categorires[input.to_i-1].list_recipes
+        @food_categories = WorldRecipes::FoodCategory.all
+        @food_categories[input.to_i-1].list_recipes
         input = "exit"
       elsif input == "list"
         list_cuisines
@@ -49,6 +49,28 @@ class WorldRecipes::CLI
         puts "Not sure what you want, type list, cuisine number or exit."
       end
     end
+  end
+
+  def recipe
+    input = nil
+    while input != "exit"
+      puts "Enter the number of the recipe you'd like to see, type recipe list to see the recipes again, cuisine list to go back to the cuisines or type category list to see the food categories again, or tye exit:"
+      input = gets.strip.downcase
+      if input.to_i > 0
+        @recipes = WorldRecipes::Recipe.all
+        @receipes[input.to_i-1].dipslay_recipe
+        input = "exit"
+      elsif input == "list"
+        list_cuisines
+      elsif input == "category list"
+        category_menu
+      elsif input == "recipes"
+        recipe_menu
+      else
+        puts "Not sure what you want, type list, cuisine number or exit."
+      end
+    end
+
   end
 
   def goodbye
