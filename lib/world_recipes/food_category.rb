@@ -25,4 +25,11 @@ class WorldRecipes::FoodCategory
       
       [category_1, category_2]
     end
+
+    def list_recipes
+      @recipes = WorldRecipes::Recipe.all
+      @recipes.each.with_index(1) |recipe, i|
+      puts "#{i}. #{recipe.name}"
+
+    end
 end
