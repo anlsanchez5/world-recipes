@@ -54,20 +54,19 @@ class WorldRecipes::Recipe
     [recipe_1, recipe_2]
   end
 
-  def dipslay_recipe
-    self.all.each do |recipe|
+  def self.display_recipe(num)
+    i = num - 1
     puts <<-DOC.gsub /^\s*/, ''
-      #{recipe.name}
-      Link for Picture: #{recipe.picture_url}
+      #{self.all[i].name}
+      Link for Picture: #{self.all[i].picture_url}
       _____________________
-      #{recipe.number_servings}|#{recipe.cooking_time}
+      #{self.all[i].number_servings}|#{self.all[i].cooking_time}
       _____________________
 
-      #{recipe.ingredients}
+      #{self.all[i].ingredients}
 
       Instructions
-       #{recipe.instructions}
+       #{self.all[i].instructions}
      DOC
-   end
   end
 end

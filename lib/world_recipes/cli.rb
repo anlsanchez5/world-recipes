@@ -57,8 +57,7 @@ class WorldRecipes::CLI
       puts "Enter the number of the recipe you'd like to see, type recipe list to see the recipes again, cuisine list to go back to the cuisines or type category list to see the food categories again, or tye exit:"
       input = gets.strip.downcase
       if input.to_i > 0
-        @recipes = WorldRecipes::Recipe.all
-        @receipes[input.to_i-1].dipslay_recipe
+        @recipes = WorldRecipes::Recipe.display_recipe(input.to_i)
         input = "exit"
       elsif input == "list"
         list_cuisines
