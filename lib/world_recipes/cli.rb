@@ -1,3 +1,4 @@
+require 'pry'
 class WorldRecipes::CLI
 
   def call
@@ -17,16 +18,16 @@ class WorldRecipes::CLI
   end
 
   def category_menu
-    input = nil
-    while input != "exit"
+    @input = []
+    while @input.last != "exit"
       puts "Enter the number of the cuisine you'd like more food categories on,
       type list to see the cusines again or type exit:"
-      input = gets.strip.downcase
-      if input.to_i > 0
-        @cuisines[input.to_i-1].list_category
-        input = "exit"
-      elsif input == "list"
-        call
+      @input << gets.strip.downcase
+      if @input.last.to_i > 0 && @input.last.to_i < @cuisines.length.to_i
+        @cuisines[@input.last.to_i-1].list_category
+        @input << "exit"
+      elsif @input.last == "list"
+        list_cuisines
       else
         puts "Not sure what you want, type list, cuisine number or exit."
       end
@@ -34,21 +35,17 @@ class WorldRecipes::CLI
   end
 
   def recipe_menu
-    input = []
-    while input != "exit"
+    while @input.last != "exit"
       puts "Enter the number of the food category you'd like to see recipes on,
-      type list to go back to the cuisines or type category list to see
-      the food categories again, or tye exit:"
-      input << gets.strip.downcase
-      if input.last.to_i > 0
-        @food_categories = WorldRecipes::FoodCategory.all
-        @food_categories[input.last.to_i-1].list_recipes
-        input = "exit"
-      elsif input == "list"
-        call
-      elsif input == "category list"
-        i = input.length - 2
-        @cuisines[input[i].to_i].list_category
+      type list to see the categories again or tye exit:"
+      @input << gets.strip.downcase
+      @food_categories = WorldRecipes::FoodCategory.all
+      if @input.last.to_i > 0 && @input.last.to_i < @food_categories.length.to_i
+        @food_categories[@input.last.to_i-1].list_recipes
+        @input <<"exit"
+      elsif @input.last == "list"
+        i = @input.length - 1
+        @cuisines[@input[i].to_i-1].list_category
       else
         puts "Not sure what you want, type list, cuisine number or exit."
       end
@@ -56,23 +53,15 @@ class WorldRecipes::CLI
   end
 
   def recipe
-    input = []
-    while input != "exit"
-      puts "Enter the number of the recipe you'd like to see, type recipe list
-      to see the recipes again, cuisine list to go back to the cuisines or type
-      category list to see the food categories again, or tye exit:"
-      input << gets.strip.downcase
-      if input.to_i > 0
-        @recipes = WorldRecipes::Recipe.display_recipe(input.to_i)
-        input = "exit"
-      elsif input == "list"
-        call
-      elsif input == "category list"
-        i = input.length - 2
-        @cuisines[input[i].to_i].list_category
-        category_menu
-      elsif input == "recipes"
-        recipe_menu
+    while @input.last != "exit"
+      puts "Enter the number of the recipe you'd like to see,list to see the recipe list again or tye exit:"
+      @input << gets.strip.downcase
+      @recipe = WorldRecipes::Recipe.all
+      if @input.last.to_i > 0 && @input.last.to_i < @recipe.length.to_i
+        WorldRecipes::Recipe.display_recipe(@input.last.to_i)
+        @input << "exit"
+      elsif @input.last == "list"
+        @food_categories[@input.last.to_i-1].list_recipes
       else
         puts "Not sure what you want, type list, cuisine number or exit."
       end
