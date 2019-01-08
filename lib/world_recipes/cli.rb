@@ -1,4 +1,4 @@
-require 'pry'
+
 class WorldRecipes::CLI
 
   def call
@@ -35,6 +35,7 @@ class WorldRecipes::CLI
   end
 
   def recipe_menu
+    @input.pop
     while @input.last != "exit"
       puts "Enter the number of the food category you'd like to see recipes on,
       type list to see the categories again or tye exit:"
@@ -53,6 +54,7 @@ class WorldRecipes::CLI
   end
 
   def recipe
+    @input.pop
     while @input.last != "exit"
       puts "Enter the number of the recipe you'd like to see,list to see the recipe list again or tye exit:"
       @input << gets.strip.downcase
@@ -71,5 +73,4 @@ class WorldRecipes::CLI
   def goodbye
     puts "See you later for more recipes!!"
   end
-
 end
