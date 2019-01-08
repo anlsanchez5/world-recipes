@@ -5,14 +5,6 @@ class WorldRecipes::Cuisine
   end
 
   def self.all
-    # I should return a list of instances of Cuisine
-  #  puts <<-DOC.gsub /^\s*/, ''
-  #    1. Mexican
-  #    2. Indian
-  #    3. Korean
-  #    4. American
-  #    5. Japanese
-  #  DOC
     cuisine_1 = self.new
     #cuisine_1.food_categories = WorldRecipes::FoodCategory.all # this will be an array of FoodCagegory instances
     cuisine_1.name = "Mexican"

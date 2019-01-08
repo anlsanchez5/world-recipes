@@ -5,13 +5,6 @@ class WorldRecipes::Recipe
   end
 
   def self.all
-    # I should return a list of instances of Cuisine
-  #  puts <<-DOC.gsub /^\s*/, ''
-  #    1. Arroz con leche
-  #    2. Abuelita chocolate
-  #    3. Champurado
-  #    4. tamales dulces
-  #  DOC
     recipe_1 = self.new
     recipe_1.name = "Arroz con leche"
     recipe_1.picture_url = "http://allrecipes.com/arrozconleche"
@@ -46,7 +39,7 @@ class WorldRecipes::Recipe
         6 cups whole milk
         1 tablespoon vanilla extract
       "
-        recipe_1.instructions = "
+        recipe_2.instructions = "
         1.  Whisk cold water, sugar, cocoa powder, flour, cinnamon, cloves, and salt in a saucepan until smooth.
             Place over low heat; bring to a simmer, whisking constantly, until mixture is thickened and hot, about 4 minutes.
             Stir in milk; heat until hot chocolate just forms bubbles around the edge. Mix vanilla extract into hot chocolate.
