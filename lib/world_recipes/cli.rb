@@ -2,6 +2,7 @@
 class WorldRecipes::CLI
 
   def call
+    WorldRecipes::Scraper.new.make_cuisines
     list_cuisines
     category_menu
     recipe_menu

@@ -1,6 +1,17 @@
 class WorldRecipes::Cuisine
   attr_accessor :name, :url, :food_categories
   @@all = []
+
+
+  def self.new_from_index_page
+  #  self.new()
+    cuisine_1 = self.new("Mexican","http://allrecipes.com/mexican", WorldRecipes::FoodCategory.all )
+    #cuisine_1.food_categories = WorldRecipes::FoodCategory.all # this will be an array of FoodCagegory instances
+    cuisine_2 = self.new("Indian", "http://allrecipes.com/indian",  )
+    
+    [cuisine_1, cuisine_2]
+  end
+
   def initialize(name, url, food_categories)
     @name = name
     @url = url
@@ -10,17 +21,6 @@ class WorldRecipes::Cuisine
 
   def self.all
     @@all
-    cuisine_1 = self.new
-    #cuisine_1.food_categories = WorldRecipes::FoodCategory.all # this will be an array of FoodCagegory instances
-    cuisine_1.name = "Mexican"
-    cuisine_1.url = "http://allrecipes.com/mexican"
-
-    cuisine_2 = self.new
-    cuisine_2.name = "Indian"
-    #cuisine_2.food_categories = WorldRecipes::FoodCategory.all # this will be an array of FoodCagegory instances
-    cuisine_2.url = "http://allrecipes.com/indian"
-
-    [cuisine_1, cuisine_2]
   end
 
   def new_category(name, url, recipes)

@@ -1,25 +1,19 @@
 class WorldRecipes::FoodCategory
-    attr_accessor :name, :url, :recipes
-    @@all = []
+    attr_accessor :name, :url, :recipes, :cuisine
 
-    def initialize(name, url)
+    def self.new_from_index_page
+      category_1 = self.new("Desserts","http://allrecipes.com/mexican", "Abuelita Chocolate" )
+      category_2 = self.new("Appetizers", "http://allrecipes.com/indian", "Arroz con Leche")
+    end
+
+    def initialize(name, url, recipes)
       @name = name
       @url = url
-      @@all << self
+      @recipes = recipes
+       << self
     end
 
-    def self.all
-      @@all
-    #  category_1 = self.new
-    #  category_1.name = "Desserts"
-    #  category_1.recipes = "list of desserts " # this will be an array of Recipe instances
-    #  category_1.url = "http://allrecipes.com/mexican"
-    #  category_2 = self.new
-    #  category_2.name = "Appetizers"
-    #  category_2.recipes = "list of Appetizers" # this will be an array of Recipe instances
-    #  category_2.url = "http://allrecipes.com/indian"
-    #  [category_1, category_2]
-    end
+
 
     def add_recipe(recipe)
       @recipes << recipe
