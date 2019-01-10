@@ -3,10 +3,8 @@ class WorldRecipes::Cuisine
   @@all = []
 
 
-  def self.new_from_index_page
-    cuisine_1 = self.new("Mexican","http://allrecipes.com/mexican", WorldRecipes::Scraper.new.make_food_categories )
-
-    cuisine_2 = self.new("Indian", "http://allrecipes.com/indian", WorldRecipes::Scraper.new.make_food_categories  )
+  def self.new_from_index_page(name, url)
+    self.new(name, url, WorldRecipes::Scraper.new.make_food_categories)
   end
 
   def initialize(name, url, food_categories)
