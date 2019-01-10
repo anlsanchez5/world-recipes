@@ -5,11 +5,9 @@ class WorldRecipes::Cuisine
 
   def self.new_from_index_page
   #  self.new()
-    cuisine_1 = self.new("Mexican","http://allrecipes.com/mexican", WorldRecipes::FoodCategory.all )
+    cuisine_1 = self.new("Mexican","http://allrecipes.com/mexican", WorldRecipes::FoodCategory.new_from_index_page )
     #cuisine_1.food_categories = WorldRecipes::FoodCategory.all # this will be an array of FoodCagegory instances
-    cuisine_2 = self.new("Indian", "http://allrecipes.com/indian",  )
-    
-    [cuisine_1, cuisine_2]
+    cuisine_2 = self.new("Indian", "http://allrecipes.com/indian", WorldRecipes::FoodCategory.new_from_index_page  )
   end
 
   def initialize(name, url, food_categories)
@@ -24,12 +22,13 @@ class WorldRecipes::Cuisine
   end
 
   def new_category(name, url, recipes)
-    WorldRecipes::FoodCategory.new(name,url, recipes, self)
+    category = WorldRecipes::FoodCategory.new(name,url, recipes, self)
+    @food_categories << category
   end
 
-  def list_category
-    @food_categories = WorldRecipes::FoodCategory.all
-    @food_categories.each.with_index(1) do |category, i|
+  def list_category(i)
+    categories = self.all[i-1].food_categories
+    categories.each.with_index(1) do |category, i|
       puts "#{i}. #{category.name}"
     end
   end

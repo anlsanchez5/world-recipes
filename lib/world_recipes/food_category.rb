@@ -2,18 +2,17 @@ class WorldRecipes::FoodCategory
     attr_accessor :name, :url, :recipes, :cuisine
 
     def self.new_from_index_page
-      category_1 = self.new("Desserts","http://allrecipes.com/mexican", "Abuelita Chocolate" )
-      category_2 = self.new("Appetizers", "http://allrecipes.com/indian", "Arroz con Leche")
+      category_1 = WorldRecipes::Cuisine.new_category("Desserts","http://allrecipes.com/mexican", "Abuelita Chocolate" )
+      category_2 = WorldRecipes::Cuisine.new_category("Appetizers", "http://allrecipes.com/indian", "Arroz con Leche")
+      [category_1, category_2]
     end
 
-    def initialize(name, url, recipes)
+    def initialize(name, url, recipes, cuisine)
       @name = name
       @url = url
       @recipes = recipes
-       << self
+      @cuisine = cuisine
     end
-
-
 
     def add_recipe(recipe)
       @recipes << recipe
