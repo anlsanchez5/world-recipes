@@ -25,4 +25,17 @@ class WorldRecipes::Scraper
 #   scrape_food_categories_index.each do |fc|
     WorldRecipes::FoodCategory.new_from_index_page
   end
+
+  def get_recipes_page
+    Nokogiri::HTML(open(""))
+  end
+
+  def scrape_recipes_index
+    self.get_recipes_page.css("")
+  end
+
+  def make_recipes
+    # scrape_recipes_index.each do |r|
+    WorldRecipes::Recipe.new_from_index_page
+  end
 end

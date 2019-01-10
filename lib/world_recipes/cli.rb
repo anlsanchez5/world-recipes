@@ -1,4 +1,4 @@
-
+require 'pry'
 class WorldRecipes::CLI
 
   def call
@@ -24,8 +24,8 @@ class WorldRecipes::CLI
       puts "Enter the number of the cuisine you'd like more food categories on,
       type list to see the cusines again or type exit:"
       @input << gets.strip.downcase
-      if @input.last.to_i > 0 && @input.last.to_i < @cuisines.length.to_i
-        @cuisines[@input.last.to_i-1].list_category
+      if @input.last.to_i > 0 && @input.last.to_i <= @cuisines.length.to_i
+        @cuisines[@input.last.to_i-1].list_categories
         @input << "exit"
       elsif @input.last == "list"
         list_cuisines
@@ -41,13 +41,16 @@ class WorldRecipes::CLI
       puts "Enter the number of the food category you'd like to see recipes on,
       type list to see the categories again or tye exit:"
       @input << gets.strip.downcase
-      @food_categories = WorldRecipes::FoodCategory.all
-      if @input.last.to_i > 0 && @input.last.to_i < @food_categories.length.to_i
+      i = @input.length - 1
+      @food_categories = @cuisines[i.to_i-1].food_categories
+#      binding.pry
+      if @input.last.to_i > 0 && @input.last.to_i <= @food_categories.length.to_i
         @food_categories[@input.last.to_i-1].list_recipes
         @input <<"exit"
       elsif @input.last == "list"
-        i = @input.length - 1
-        @cuisines[@input[i].to_i-1].list_category
+        #i = @input.length - 1
+        @cuisines[@input[i].to_i-1].list_categories
+        @input.pop
       else
         puts "Not sure what you want, type list, cuisine number or exit."
       end
@@ -59,12 +62,14 @@ class WorldRecipes::CLI
     while @input.last != "exit"
       puts "Enter the number of the recipe you'd like to see,list to see the recipe list again or tye exit:"
       @input << gets.strip.downcase
-      @recipe = WorldRecipes::Recipe.all
-      if @input.last.to_i > 0 && @input.last.to_i < @recipe.length.to_i
-        WorldRecipes::Recipe.display_recipe(@input.last.to_i)
+      i = @input.length - 1
+      @recipes = @food_categories[i.to_i-1].recipes
+      if @input.last.to_i > 0 && @input.last.to_i <= @recipes.length.to_i
+        @recipes[@input.last.to_i-1].display_recipe
         @input << "exit"
       elsif @input.last == "list"
-        @food_categories[@input.last.to_i-1].list_recipes
+        @food_categories[i.to_i-1].list_recipes
+        @input.pop
       else
         puts "Not sure what you want, type list, cuisine number or exit."
       end

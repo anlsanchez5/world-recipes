@@ -22,11 +22,12 @@ class WorldRecipes::Cuisine
 
   def new_category(name, url, recipes)
     category = WorldRecipes::FoodCategory.new(name,url, recipes, self)
-    @food_categories << category
+    @food_categories << category unless @food_categories.include?(category) == true
   end
 
-  def list_category(i)
-    categories = self.all[i-1].food_categories
+  def list_categories
+  #  categories = self.all[i-1].food_categories
+    categories = self.food_categories
     categories.each.with_index(1) do |category, i|
       puts "#{i}. #{category.name}"
     end
