@@ -4,10 +4,9 @@ class WorldRecipes::Cuisine
 
 
   def self.new_from_index_page
-  #  self.new()
-    cuisine_1 = self.new("Mexican","http://allrecipes.com/mexican", WorldRecipes::FoodCategory.new_from_index_page )
-    #cuisine_1.food_categories = WorldRecipes::FoodCategory.all # this will be an array of FoodCagegory instances
-    cuisine_2 = self.new("Indian", "http://allrecipes.com/indian", WorldRecipes::FoodCategory.new_from_index_page  )
+    cuisine_1 = self.new("Mexican","http://allrecipes.com/mexican", WorldRecipes::Scraper.new.make_food_categories )
+
+    cuisine_2 = self.new("Indian", "http://allrecipes.com/indian", WorldRecipes::Scraper.new.make_food_categories  )
   end
 
   def initialize(name, url, food_categories)
