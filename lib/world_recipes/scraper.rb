@@ -9,8 +9,8 @@ class WorldRecipes::Scraper
   end
 
   def make_cuisines
-     url = scrape_cuisines_index.css("a").map {|link| link['href']}
-     name = scrape_cuisines_index.css("")
+    # url = scrape_cuisines_index.css("a").map {|link| link['href']}
+    # name = scrape_cuisines_index.css("")
      scrape_cuisines_index.each do |c|
      WorldRecipes::Cuisine.new_from_index_page(c)
      end
