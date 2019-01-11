@@ -5,7 +5,7 @@ class WorldRecipes::Scraper
   end
 
   def scrape_cuisines_index
-    self.get_page.css("a.grid-col--subnav")
+    self.get_cuisine_page.css("a.grid-col--subnav")
   end
 
   def make_cuisines

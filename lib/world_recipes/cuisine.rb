@@ -1,10 +1,14 @@
+require 'pry'
 class WorldRecipes::Cuisine
   attr_accessor :name, :url, :food_categories
   @@all = []
 
 
   def self.new_from_index_page(c)
-    self.new(c.css("span.category-title").text, "https://www.allrecipes.com#{c.css("a").attribute("href").text}", WorldRecipes::Scraper.new.make_food_categories)
+#  binding.pry
+    self.new(c.css("span.category-title").text,
+    c.attribute("href").text,
+     WorldRecipes::Scraper.new.make_food_categories)
   end
 
   def initialize(name, url, food_categories)
