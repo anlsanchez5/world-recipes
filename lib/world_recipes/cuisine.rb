@@ -3,12 +3,11 @@ class WorldRecipes::Cuisine
   attr_accessor :name, :url, :food_categories
   @@all = []
 
-
   def self.new_from_index_page(c)
-#  binding.pry
+    link = c.attribute("href").text
     self.new(c.css("span.category-title").text,
-    c.attribute("href").text,
-     WorldRecipes::Scraper.new.make_food_categories)
+    link,
+    WorldRecipes::Scraper.new.make_food_categories(link))
   end
 
   def initialize(name, url, food_categories)
@@ -28,12 +27,9 @@ class WorldRecipes::Cuisine
   end
 
   def list_categories
-  #  categories = self.all[i-1].food_categories
     categories = self.food_categories
     categories.each.with_index(1) do |category, i|
       puts "#{i}. #{category.name}"
     end
   end
-
-
 end

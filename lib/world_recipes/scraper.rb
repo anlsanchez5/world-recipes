@@ -1,3 +1,4 @@
+require 'pry'
 class WorldRecipes::Scraper
 
   def get_cuisine_page
@@ -9,24 +10,24 @@ class WorldRecipes::Scraper
   end
 
   def make_cuisines
-    # url = scrape_cuisines_index.css("a").map {|link| link['href']}
-    # name = scrape_cuisines_index.css("")
      scrape_cuisines_index.each do |c|
      WorldRecipes::Cuisine.new_from_index_page(c)
      end
   end
 
-  def get_food_category_page
-    Nokogiri::HTML(open(""))
+  def get_food_category_page(link)
+    Nokogiri::HTML(open("#{link}"))
   end
 
-  def scrape_food_categories_index
-    self.get_category_page.css("")
+  def scrape_food_categories_index(l)
+    self.get_food_category_page(l).css("a.grid-col--subnav")
   end
 
-  def make_food_categories
-#   scrape_food_categories_index.each do |fc|
-    WorldRecipes::FoodCategory.new_from_index_page
+  def make_food_categories(link)
+#binding.pry
+    scrape_food_categories_index(link).each do |fc|
+      WorldRecipes::FoodCategory.new_from_index_page(fc)
+    end
   end
 
   def get_recipes_page

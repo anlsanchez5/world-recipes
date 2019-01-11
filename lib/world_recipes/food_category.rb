@@ -1,10 +1,12 @@
+require 'pry'
 class WorldRecipes::FoodCategory
     attr_accessor :name, :url, :recipes, :cuisine
 
-    def self.new_from_index_page
-      category_1 = self.new("Desserts","http://allrecipes.com/mexican", WorldRecipes::Scraper.new.make_recipes )
-      category_2 = self.new("Appetizers", "http://allrecipes.com/indian", WorldRecipes::Scraper.new.make_recipes)
-      [category_1, category_2]
+    def self.new_from_index_page(fc)
+      link = fc.attribute("href").text
+  binding.pry
+      self.new(fc.css("span.category-title").text,
+      link, WorldRecipes::Scraper.new.make_recipes)
     end
 
     def initialize(name, url, recipes)
