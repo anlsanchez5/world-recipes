@@ -4,16 +4,12 @@ class WorldRecipes::Cuisine
   @@all = []
 
   def self.new_from_index_page(c)
-    link = c.attribute("href").text
-    self.new(c.css("span.category-title").text,
-    link,
-    WorldRecipes::Scraper.new.make_food_categories(link))
+    self.new(c.css("span.category-title").text,c.attribute("href").text)
   end
 
-  def initialize(name, url, food_categories)
+  def initialize(name, url)
     @name = name
     @url = url
-    @food_categories = food_categories
     @@all << self
   end
 
@@ -21,14 +17,14 @@ class WorldRecipes::Cuisine
     @@all
   end
 
-  def new_category(name, url, recipes)
-    category = WorldRecipes::FoodCategory.new(name,url, recipes, self)
-    @food_categories << category unless @food_categories.include?(category) == true
+  def create_categories
+    self.food_categories = WorldRecipes::Scraper.new.make_food_categories(self.url) unless self.food_categories != nil
+    self.food_categories
   end
 
   def list_categories
-    categories = self.food_categories
-    categories.each.with_index(1) do |category, i|
+    create_categories
+    self.food_categories.each.with_index(1) do |category, i|
       puts "#{i}. #{category.name}"
     end
   end

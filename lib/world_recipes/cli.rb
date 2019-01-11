@@ -4,9 +4,9 @@ class WorldRecipes::CLI
   def call
     WorldRecipes::Scraper.new.make_cuisines
     list_cuisines
+    cuisine_menu
     category_menu
     recipe_menu
-    recipe
     goodbye
   end
 
@@ -18,7 +18,7 @@ class WorldRecipes::CLI
     end
   end
 
-  def category_menu
+  def cuisine_menu
     @input = []
     while @input.last != "exit"
       puts "Enter the number of the cuisine you'd like more food categories on,
@@ -35,20 +35,19 @@ class WorldRecipes::CLI
     end
   end
 
-  def recipe_menu
+  def category_menu
     @input.pop
     while @input.last != "exit"
       puts "Enter the number of the food category you'd like to see recipes on,
-      type list to see the categories again or tye exit:"
+      type list to see the categories again or type exit:"
       @input << gets.strip.downcase
-      i = @input.length - 1
+      i = @input[(@input.length) - 1]
       @food_categories = @cuisines[i.to_i-1].food_categories
-#      binding.pry
+      
       if @input.last.to_i > 0 && @input.last.to_i <= @food_categories.length.to_i
         @food_categories[@input.last.to_i-1].list_recipes
         @input <<"exit"
       elsif @input.last == "list"
-        #i = @input.length - 1
         @cuisines[@input[i].to_i-1].list_categories
         @input.pop
       else
@@ -57,12 +56,12 @@ class WorldRecipes::CLI
     end
   end
 
-  def recipe
+  def recipe_menu
     @input.pop
     while @input.last != "exit"
       puts "Enter the number of the recipe you'd like to see,list to see the recipe list again or tye exit:"
       @input << gets.strip.downcase
-      i = @input.length - 1
+      i = @input[@input.length - 1]
       @recipes = @food_categories[i.to_i-1].recipes
       if @input.last.to_i > 0 && @input.last.to_i <= @recipes.length.to_i
         @recipes[@input.last.to_i-1].display_recipe
