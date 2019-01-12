@@ -4,11 +4,10 @@ class WorldRecipes::Recipe
 
   def self.new_from_index_page(r)
     self.new(r.css("h3 span").text,
-    r.css("img").attribute("src").text,
-    )
+    r.css("img").attribute("src").text)
   end
 
-  def initialize(name, picture_url=nil, number_servings=nil, cooking_time=nil, ingredients, instructions)
+  def initialize(name, picture_url=nil, number_servings=nil, cooking_time=nil, ingredients=nil, instructions=nil)
     @name = name
     @picture_url = picture_url
     @number_servings = number_servings

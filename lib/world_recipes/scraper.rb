@@ -1,3 +1,4 @@
+require 'open-uri'
 require 'pry'
 class WorldRecipes::Scraper
 
@@ -32,7 +33,7 @@ class WorldRecipes::Scraper
   end
 
   def get_recipes_page(link)
-    Nokogiri::HTML(open("link"))
+     Nokogiri::HTML(open("#{link}"))
   end
 
   def scrape_recipes_index(link)
@@ -44,5 +45,6 @@ class WorldRecipes::Scraper
     scrape_recipes_index(link).each do |r|
       recipes << WorldRecipes::Recipe.new_from_index_page(r)
     end
+    recipes
   end
 end

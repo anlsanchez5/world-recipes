@@ -1,4 +1,6 @@
+require 'open-uri'
 require 'pry'
+
 class WorldRecipes::CLI
 
   def call
@@ -41,9 +43,9 @@ class WorldRecipes::CLI
       puts "Enter the number of the food category you'd like to see recipes on,
       type list to see the categories again or type exit:"
       @input << gets.strip.downcase
-      i = @input[(@input.length) - 1]
+      i = @input[(@input.length) - 2]
       @food_categories = @cuisines[i.to_i-1].food_categories
-      
+  #  binding.pry
       if @input.last.to_i > 0 && @input.last.to_i <= @food_categories.length.to_i
         @food_categories[@input.last.to_i-1].list_recipes
         @input <<"exit"
@@ -61,7 +63,7 @@ class WorldRecipes::CLI
     while @input.last != "exit"
       puts "Enter the number of the recipe you'd like to see,list to see the recipe list again or tye exit:"
       @input << gets.strip.downcase
-      i = @input[@input.length - 1]
+      i = @input[@input.length - 2]
       @recipes = @food_categories[i.to_i-1].recipes
       if @input.last.to_i > 0 && @input.last.to_i <= @recipes.length.to_i
         @recipes[@input.last.to_i-1].display_recipe
