@@ -21,7 +21,7 @@ class WorldRecipes::Recipe
  def get_recipe_data
     doc = WorldRecipes::Scraper.new.scrape_recipe_data(self.url)
     self.number_servings = doc.css("")
-    self.cooking_time = doc.css("")
+    self.cooking_time = doc.css("span.ready-in-time").text
     self.ingredients = doc.css("")
     self.instructions = doc.css("")
   end
