@@ -48,7 +48,7 @@ class WorldRecipes::Scraper
     recipes
   end
 
-#  def scrape_recipe_data(link)
-#    Nokogiri::HTML(open("#{link}")
-#  end
+  def scrape_recipe_data(link)
+    Nokogiri::HTML(open("#{link}"))
+  end
 end

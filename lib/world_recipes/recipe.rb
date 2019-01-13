@@ -1,5 +1,5 @@
 class WorldRecipes::Recipe
-  attr_accessor :name, :picture_url, :number_servings, :cooking_time, :ingredients, :instructions, :food_category
+  attr_accessor :name, :picture_url, :url, :number_servings, :cooking_time, :ingredients, :instructions, :food_category
 
 
   def self.new_from_index_page(r)
@@ -20,10 +20,11 @@ class WorldRecipes::Recipe
 
  def get_recipe_data
     doc = WorldRecipes::Scraper.new.scrape_recipe_data(self.url)
-    self.number_servings = doc.css("")
+
+    #self.number_servings = doc.css("")
     self.cooking_time = doc.css("span.ready-in-time").text
-    self.ingredients = doc.css("")
-    self.instructions = doc.css("")
+    self.ingredients = doc.css("li span.recipe-ingred_txt").text
+    self.instructions = doc.css("span.recipe-directions__list--item").text
   end
 
   def display_recipe
