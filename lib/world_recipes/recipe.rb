@@ -28,36 +28,45 @@ class WorldRecipes::Recipe
       self.ingredients << i.text
     end
     self.ingredients.delete_if{|x| x >= "Add all ingredients to list"}
-    self.instructions = doc.css("span.recipe-directions__list--item").text
+    self.instructions = []
+    instructions= doc.css("span.recipe-directions__list--item")
+    instructions.each do |s|
+      self.instructions << s.text
+    end
+    self.instructions.delete_if{|x| x >= "Watch Now"}
   end
 
   def display_ingredients
+    puts ""
     @ingredients.each do |i|
       puts "#{
       i}"
     end
+    puts "__________________________________________________"
+    puts ""
   end
 
   def display_instructions
-    @instructions = @instructions.split("\n")
-  #  binding.pry
+    puts ""
     @instructions.each do |i|
       puts "#{i}"
     end
+
   end
 
   def display_recipe
     get_recipe_data
   #  binding.pry
+    puts ""
     puts <<-DOC.gsub /^\s*/, ''
 
       #{@name}
       Link for Picture: #{@picture_url}
-      _____________________
+      ---------------------
       #{@number_servings} | #{@cooking_time}
       ---------------------
     DOC
-
+    puts ""
     puts "Ingredients"
     display_ingredients
     puts "Instructions"
