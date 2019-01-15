@@ -1,6 +1,6 @@
 # WorldRecipes
 
-This Ruby Gem provides a CLI to view the top world cusine recipes based on culture and type of food as per the All Recipes website.
+This Ruby Gem provides a CLI to view the top world cuisine recipes based on culture and type of food as per the All Recipes website.
 
 ## Installation
 
@@ -12,7 +12,7 @@ gem 'world_recipes'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
