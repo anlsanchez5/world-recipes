@@ -27,13 +27,10 @@ class WorldRecipes::CLI
 
   def cuisine
     list_cuisines
-    puts "Enter the number of the cuisine you'd like more food categories on,
-        type list to see the cusines again or type exit:"
+    puts "Enter the number of the cuisine you'd like more food categories on or type exit:"
     @input << gets.strip.downcase
     if @input.last.to_i > 0 && @input.last.to_i <= @cuisines.length.to_i
       @cuisines[@input.last.to_i-1].list_categories
-    elsif @input.last == "list"
-      cuisine
     elsif @input.last == "exit"
       goodbye
       exit
@@ -44,14 +41,14 @@ class WorldRecipes::CLI
 
   def category
     puts "Enter the number of the food category you'd like to see recipes on,
-         type list to see the categories again or type exit:"
+         type back to see cuisine list again or type exit:"
     @input << gets.strip.downcase
     i = @input[(@input.length) - 2]
     @food_categories = @cuisines[i.to_i-1].food_categories
     if @input.last.to_i > 0 && @input.last.to_i <= @food_categories.length.to_i
       @food_categories[@input.last.to_i-1].list_recipes
-    elsif @input.last == "list"
-      category
+    elsif @input.last == "back"
+      start
     elsif @input.last == "exit"
       goodbye
       exit
@@ -61,15 +58,18 @@ class WorldRecipes::CLI
   end
 
     def recipe
-      puts "Enter the number of the recipe you'd like to see,list to see the recipe list again or tye exit:"
+      puts "Enter the number of the recipe you'd like to see, cuisines to see cuisine list again, back to return to category list or type exit:"
       @input << gets.strip.downcase
       i = @input[@input.length - 2]
       @recipes = @food_categories[i.to_i-1].recipes
       if @input.last.to_i > 0 && @input.last.to_i <= @recipes.length.to_i
         @recipes[@input.last.to_i-1].display_recipe
         options
-      elsif @input.last == "list"
-        recipe
+      elsif @input.last == "cuisines"
+        start
+      elsif @input.last == "back"
+        @food_categories
+        category
       elsif @input.last == "exit"
         goodbye
         exit
