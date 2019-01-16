@@ -13,7 +13,7 @@ class WorldRecipes::CLI
     cuisine
     category
     recipe
-    goodbye
+    options
   end
 
 
@@ -67,6 +67,7 @@ class WorldRecipes::CLI
       @recipes = @food_categories[i.to_i-1].recipes
       if @input.last.to_i > 0 && @input.last.to_i <= @recipes.length.to_i
         @recipes[@input.last.to_i-1].display_recipe
+        options
       elsif @input.last == "list"
         recipe
       elsif @input.last == "exit"
@@ -76,6 +77,20 @@ class WorldRecipes::CLI
         puts "Not sure what you want, type list, cuisine number or exit."
       end
     end
+
+  def options
+    puts "Would you like to see more recipes? Type Y or N."
+    input = gets.strip
+    if input == "Y" || input == "y"
+      start
+    elsif input == "N" || input == "n"
+      goodbye
+      exit
+    else
+      puts "Not sure waht you want."
+      options
+    end
+  end
 
   def goodbye
     puts "See you later for more recipes!!"
