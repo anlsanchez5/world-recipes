@@ -27,6 +27,7 @@ class WorldRecipes::CLI
 
   def cuisine
     list_cuisines
+    puts ""
     puts "Enter the number of the cuisine you'd like more food categories on or type exit:"
     @input << gets.strip.downcase
     if @input.last.to_i > 0 && @input.last.to_i <= @cuisines.length.to_i
@@ -35,16 +36,21 @@ class WorldRecipes::CLI
       goodbye
       exit
     else
-      puts "Not sure what you want, type list, cuisine number or exit."
+      puts ""
+      puts "Not sure what you want."
+      puts ""
+      cuisine
     end
   end
 
   def category
+    puts ""
     puts "Enter the number of the food category you'd like to see recipes on,
          type back to see cuisine list again or type exit:"
     @input << gets.strip.downcase
     i = @input[(@input.length) - 2]
     @food_categories = @cuisines[i.to_i-1].food_categories
+#    binding.pry
     if @input.last.to_i > 0 && @input.last.to_i <= @food_categories.length.to_i
       @food_categories[@input.last.to_i-1].list_recipes
     elsif @input.last == "back"
@@ -53,32 +59,43 @@ class WorldRecipes::CLI
       goodbye
       exit
     else
-      puts "Not sure what you want, type list, cuisine number or exit."
+      puts ""
+      puts "Not sure what you want."
+      puts ""
+      category
     end
   end
 
     def recipe
+      puts ""
       puts "Enter the number of the recipe you'd like to see, cuisines to see cuisine list again, back to return to category list or type exit:"
       @input << gets.strip.downcase
       i = @input[@input.length - 2]
       @recipes = @food_categories[i.to_i-1].recipes
+#      binding.pry
       if @input.last.to_i > 0 && @input.last.to_i <= @recipes.length.to_i
         @recipes[@input.last.to_i-1].display_recipe
         options
       elsif @input.last == "cuisines"
         start
       elsif @input.last == "back"
-        @food_categories
+        @food_categories.each.with_index(1) do |c, i|
+          puts "#{i}. #{c.name}"
+        end
         category
       elsif @input.last == "exit"
         goodbye
         exit
       else
-        puts "Not sure what you want, type list, cuisine number or exit."
+        puts ""
+        puts "Not sure what you want."
+        puts ""
+        recipe
       end
     end
 
   def options
+    puts ""
     puts "Would you like to see more recipes? Type Y or N."
     input = gets.strip
     if input == "Y" || input == "y"
@@ -87,7 +104,9 @@ class WorldRecipes::CLI
       goodbye
       exit
     else
-      puts "Not sure waht you want."
+      puts ""
+      puts "Not sure what you want."
+      puts ""
       options
     end
   end
