@@ -12,15 +12,31 @@ class WorldRecipes::FoodCategory
       @url = url
     end
 
-    def create_recipes
-      self.recipes = WorldRecipes::Scraper.new.make_recipes(self.url) unless self.recipes != nil
-      self.recipes
+    def recipes
+      if @recipes == nil
+        @recipes = []
+        url_doc.each do |r|
+          @recipes << WorldRecipes::Recipe.new_from_index_page(r)
+        end
+      end
+      @recipes
     end
 
     def list_recipes
-      create_recipes
+      recipes
       self.recipes.each.with_index(1) do |recipe, i|
         puts "#{i}. #{recipe.name}"
       end
     end
+
+    def url_doc
+       recipe_page = Nokogiri::HTML(open("#{self.url}"))
+       recipe_index = recipe_page.css("article.fixed-recipe-card")
+    end
+
+
+
+
+
+
 end

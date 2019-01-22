@@ -17,27 +17,6 @@ class WorldRecipes::Scraper
   end
 
 
-
-
-
-  
-
-  def get_recipes_page(link)
-     Nokogiri::HTML(open("#{link}"))
-  end
-
-  def scrape_recipes_index(link)
-    get_recipes_page(link).css("article.fixed-recipe-card")
-  end
-
-  def make_recipes(link)
-    recipes = []
-    scrape_recipes_index(link).each do |r|
-      recipes << WorldRecipes::Recipe.new_from_index_page(r)
-    end
-    recipes
-  end
-
   def scrape_recipe_data(link)
     Nokogiri::HTML(open("#{link}"))
   end

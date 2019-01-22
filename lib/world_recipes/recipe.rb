@@ -1,5 +1,5 @@
 class WorldRecipes::Recipe
-  attr_accessor :name, :picture_url, :url, :number_servings, :cooking_time, :ingredients, :instructions, :food_category
+  attr_accessor :name, :picture_url, :url, :number_servings, :cooking_time, :ingredients, :instructions
 
 
   def self.new_from_index_page(r)
@@ -14,12 +14,8 @@ class WorldRecipes::Recipe
     @url = url
   end
 
-  def food_category
-    self.food_category = @food_category
-  end
 
  def get_recipe_data
-    doc = WorldRecipes::Scraper.new.scrape_recipe_data(self.url)
     self.number_servings = doc.css("meta#metaRecipeServings").attribute("content").text + " Servings"
     self.cooking_time = doc.css("span.ready-in-time").text
     self.ingredients = []
@@ -51,12 +47,10 @@ class WorldRecipes::Recipe
     @instructions.each do |i|
       puts "#{i}"
     end
-
   end
 
   def display_recipe
     get_recipe_data
-  #  binding.pry
     puts ""
     puts <<-DOC.gsub /^\s*/, ''
 
@@ -71,5 +65,9 @@ class WorldRecipes::Recipe
     display_ingredients
     puts "Instructions"
     display_instructions
+  end
+
+  def doc
+    Nokogiri::HTML(open("#{self.url}"))
   end
 end
