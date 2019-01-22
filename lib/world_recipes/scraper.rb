@@ -16,21 +16,11 @@ class WorldRecipes::Scraper
      end
   end
 
-  def get_food_category_page(link)
-    Nokogiri::HTML(open("#{link}"))
-  end
 
-  def scrape_food_categories_index(link)
-    get_food_category_page(link).css("a.grid-col--subnav")
-  end
 
-  def make_food_categories(link)
-    categories = []
-    scrape_food_categories_index(link).each do |fc|
-      categories << WorldRecipes::FoodCategory.new_from_index_page(fc)
-    end
-    categories
-  end
+
+
+  
 
   def get_recipes_page(link)
      Nokogiri::HTML(open("#{link}"))

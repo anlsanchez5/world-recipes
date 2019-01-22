@@ -17,15 +17,26 @@ class WorldRecipes::Cuisine
     @@all
   end
 
-  def create_categories
-    self.food_categories = WorldRecipes::Scraper.new.make_food_categories(self.url) unless self.food_categories != nil
-    self.food_categories
+  def food_categories
+    if @food_categories == nil
+      @food_categories = []
+      url_doc.each do |fc|
+        @food_categories << WorldRecipes::FoodCategory.new_from_index_page(fc)
+      end
+    end
+    @food_categories
   end
 
   def list_categories
-    create_categories
+    food_categories
     self.food_categories.each.with_index(1) do |category, i|
       puts "#{i}. #{category.name}"
     end
+  end
+
+  def url_doc
+    foodcategory_page ||= Nokogiri::HTML(open("#{self.url}"))
+    page_index ||= foodcategory_page.css("a.grid-col--subnav")
+    page_index
   end
 end
