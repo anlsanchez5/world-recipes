@@ -6,7 +6,7 @@ class WorldRecipes::Recipe
 
   def self.new_from_index_page(r)
     self.new(r.css("h3 span").text,
-    r.css("img").attribute("src").text,
+    r.css("img.fixed-recipe-card__img").attribute("data-original-src").text,
     r.css("h3 a").attribute("href").text)
   end
 

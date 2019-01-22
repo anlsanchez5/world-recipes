@@ -15,9 +15,4 @@ class WorldRecipes::Scraper
      WorldRecipes::Cuisine.new_from_index_page(c)
      end
   end
-
-
-  def scrape_recipe_data(link)
-    Nokogiri::HTML(open("#{link}"))
-  end
 end

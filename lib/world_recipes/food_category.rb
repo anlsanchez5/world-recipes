@@ -33,10 +33,4 @@ class WorldRecipes::FoodCategory
        recipe_page = Nokogiri::HTML(open("#{self.url}"))
        recipe_index = recipe_page.css("article.fixed-recipe-card")
     end
-
-
-
-
-
-
 end
