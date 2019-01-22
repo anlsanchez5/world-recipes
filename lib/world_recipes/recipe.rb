@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class WorldRecipes::Recipe
   attr_accessor :name, :picture_url, :url, :number_servings, :cooking_time, :ingredients, :instructions
 

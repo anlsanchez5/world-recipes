@@ -31,7 +31,6 @@ class WorldRecipes::CLI
     puts "Enter the number of the cuisine you'd like more food categories on or type exit:"
     @input << gets.strip.downcase
     if @input.last.to_i > 0 && @input.last.to_i <= @cuisines.length.to_i
-#        binding.pry
       @cuisines[@input.last.to_i-1].list_categories
     elsif @input.last == "exit"
       goodbye
@@ -63,6 +62,8 @@ class WorldRecipes::CLI
       puts ""
       puts "Not sure what you want."
       puts ""
+      @input.pop
+      @cuisines[@input.last.to_i-1].list_categories
       category
     end
   end
@@ -96,6 +97,8 @@ class WorldRecipes::CLI
         puts ""
         puts "Not sure what you want."
         puts ""
+        @input.pop
+        food_categories[@input.last.to_i-1].list_recipes
         recipe
       end
     end
