@@ -1,6 +1,3 @@
-require 'open-uri'
-require 'pry'
-
 class WorldRecipes::CLI
 
   def call

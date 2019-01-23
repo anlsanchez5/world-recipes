@@ -1,5 +1,3 @@
-require 'open-uri'
-require 'pry'
 class WorldRecipes::Scraper
 
   def get_cuisine_page

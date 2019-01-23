@@ -1,4 +1,3 @@
-require 'pry'
 class WorldRecipes::Cuisine
   attr_accessor :name, :url, :food_categories
   @@all = []

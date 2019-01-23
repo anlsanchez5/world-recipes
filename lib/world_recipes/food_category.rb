@@ -1,4 +1,3 @@
-require 'pry'
 class WorldRecipes::FoodCategory
     attr_accessor :name, :url, :recipes
 

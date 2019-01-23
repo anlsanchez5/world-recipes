@@ -1,5 +1,3 @@
-require 'open-uri'
-
 class WorldRecipes::Recipe
   attr_accessor :name, :picture_url, :url, :number_servings, :cooking_time, :ingredients, :instructions
 
@@ -18,6 +16,7 @@ class WorldRecipes::Recipe
 
 
  def get_recipe_data
+  # binding.pry
     self.number_servings = doc.css("meta#metaRecipeServings").attribute("content").text + " Servings"
     self.cooking_time = doc.css("span.ready-in-time").text
     self.ingredients = []
