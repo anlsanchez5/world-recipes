@@ -1,7 +1,16 @@
 class WorldRecipes::CLI
 
-  def call
-    WorldRecipes::Scraper.new.make_cuisines
+#  def call
+#    WorldRecipes::Scraper.new.make_cuisines
+#    @input = []
+#    start
+#  end
+
+  def run
+    make_cuisines
+    add_food_categories_to_cuisines
+    add_recipes_to_food_categories
+    add_attributes_to_recipes
     @input = []
     start
   end
@@ -11,6 +20,33 @@ class WorldRecipes::CLI
     category
     recipe
     options
+  end
+
+  def make_cuisines
+    cuisines_array ||= WorldRecipes::Scraper.scrape_cuisines
+    WorldRecipes::Cuisine.new_from_collection(cuisines_array)
+  end
+
+  def add_food_categories_to_cuisines
+    WorldRecipes::Cuisine.all.each do |cuisine|
+      food_categories ||= WorldRecipes::Scraper.scrape_food_categories(cuisine.url)
+      cuisine.add_food_categories(food_categories)
+    end
+  end
+
+  def add_recipes_to_food_categories
+    WorldRecipes::FoodCategory.all.each do |food_category|
+      recipes ||= WorldRecipes::Scraper.scrape_recipes(food_category.url)
+      food_category.add_recipes(recipes)
+    end
+  end
+
+  def add_attributes_to_recipes
+    WorldRecipes::Recipe.all.shift
+    WorldRecipes::Recipe.all.each do |recipe|
+      attributes = WorldRecipes::Scraper.scrape_recipe_page(recipe.url)
+      recipe.add_recipe_attributes(attributes)
+    end
   end
 
 

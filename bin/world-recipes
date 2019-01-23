@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/world_recipes'
-WorldRecipes::CLI.new.call
+WorldRecipes::CLI.new.run
