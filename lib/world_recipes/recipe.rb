@@ -17,14 +17,14 @@ class WorldRecipes::Recipe
   def self.all
     @@all
   end
-  
+
   def initialize(recipe_hash)
     recipe_hash.each {|key, value| self.send(("#{key}="), value)}
     @@all << self
   end
 
-  def self.create_from_collection(recipes_array)
-    recipes.array.each {|recipe_hash| self.new(recipe_hash)}
+  def self.new_from_collection(recipes_array)
+    recipes_array.each {|recipe_hash| self.new(recipe_hash)}
   end
 
 def add_recipe_attributes(attributes_hash)
